@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
 import java.util.List;
 
 public class GUI {
@@ -28,9 +29,11 @@ public class GUI {
     private JButton transferButton1;
     private JButton transferButton2;
     private JButton clearTeamButton;
+    private JButton clearTasksButton;
     private List<Project> projects;
     private Project.ProjectHandler handler;
     private DefaultListModel<String> defaultListModel = new DefaultListModel<String>();
+    private DefaultListModel<String> model2 = new DefaultListModel<String>();
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("Project Management");
@@ -41,7 +44,6 @@ public class GUI {
 
     }
     public GUI(){
-
 
         newTeamButton.addActionListener(new ActionListener() {
             @Override
@@ -61,7 +63,8 @@ public class GUI {
         newTaskButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                String message = JOptionPane.showInputDialog("New task:");
+                ((DefaultListModel)allTasksList.getModel()).addElement(message);
             }
         });
 
@@ -80,7 +83,12 @@ public class GUI {
         transferButton2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                currentTeam.setModel(model2);
+                int[] selectedIndices = allTasksList.getSelectedIndices();
+                for(int i=0; i < selectedIndices.length; i++) {
+                    Object whatever = allTasksList.getModel().getElementAt(selectedIndices[i]);
+                    ((DefaultListModel)completedTasksList.getModel()).addElement(whatever);
+                }
             }
         });
 
@@ -91,8 +99,25 @@ public class GUI {
                 currentTeam.setModel(defaultListModel);
             }
         });
-    }
 
+        clearTasksButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                model2.clear();
+                completedTasksList.setModel(model2);
+            }
+        });
+
+        savedProjects.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Not needed functionality now - Mario
+//                String s = (String)savedProjects.getSelectedItem();
+//                completedTasksList.setModel(model2);
+//                ((DefaultListModel)allTasksList.getModel()).addElement(s);
+            }
+        });
+    }
 
 }
 

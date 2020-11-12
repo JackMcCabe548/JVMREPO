@@ -167,7 +167,7 @@
               </component>
             </children>
           </grid>
-          <grid id="9fa0e" binding="tab2" layout-manager="GridLayoutManager" row-count="5" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="9fa0e" binding="tab2" layout-manager="GridLayoutManager" row-count="6" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <tabbedpane title="Project Management"/>
@@ -179,7 +179,14 @@
                 <constraints>
                   <grid row="0" column="0" row-span="1" col-span="4" vsize-policy="0" hsize-policy="2" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
-                <properties/>
+                <properties>
+                  <model>
+                    <item value="Mario"/>
+                    <item value="Misho"/>
+                    <item value="Nikola"/>
+                    <item value="Miglen"/>
+                  </model>
+                </properties>
               </component>
               <component id="4f8ba" class="javax.swing.JButton" binding="newTaskButton" default-binding="true">
                 <constraints>
@@ -203,7 +210,12 @@
                     <preferred-size width="150" height="50"/>
                   </grid>
                 </constraints>
-                <properties/>
+                <properties>
+                  <model>
+                    <item value="Nikolin"/>
+                    <item value="Mariusin"/>
+                  </model>
+                </properties>
               </component>
               <component id="2193a" class="javax.swing.JList" binding="completedTasksList">
                 <constraints>
@@ -253,6 +265,14 @@
                 </constraints>
                 <properties>
                   <text value="&gt;&gt;"/>
+                </properties>
+              </component>
+              <component id="31465" class="javax.swing.JButton" binding="clearTasksButton" default-binding="true">
+                <constraints>
+                  <grid row="5" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Clear Tasks"/>
                 </properties>
               </component>
             </children>
