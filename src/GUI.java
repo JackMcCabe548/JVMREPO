@@ -10,7 +10,7 @@ public class GUI {
     private JTextField txtProjectDeadline;
     private JButton newTeamButton;
     private JComboBox savedTeams;
-    private JList membersList;
+    private JList<Object> membersList;
     private JList teamLeaderList;
     private JList currentTeam;
     private JButton saveButton;
@@ -25,8 +25,12 @@ public class GUI {
     private JLabel projectDeadlineLabel;
     private JLabel newProjectLabel;
     private JLabel trackProgressLabel;
+    private JButton transferButton1;
+    private JButton transferButton2;
+    private JButton clearTeamButton;
     private List<Project> projects;
-    private ProjectHandler handler;
+    private Project.ProjectHandler handler;
+    private DefaultListModel<String> defaultListModel = new DefaultListModel<String>();
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("Project Management");
@@ -34,8 +38,10 @@ public class GUI {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+
     }
     public GUI(){
+
 
         newTeamButton.addActionListener(new ActionListener() {
             @Override
@@ -43,6 +49,7 @@ public class GUI {
 
             }
         });
+
         saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -50,13 +57,44 @@ public class GUI {
                 //projects = handler.createProject(txtProjectName.getText(), txtProjectDeadline.getText(), )
             }
         });
+
         newTaskButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
             }
         });
+
+        transferButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                currentTeam.setModel(defaultListModel);
+                int[] selectedIndices = membersList.getSelectedIndices();
+                for(int i=0; i < selectedIndices.length; i++) {
+                    Object whatever = membersList.getModel().getElementAt(selectedIndices[i]);
+                    ((DefaultListModel)currentTeam.getModel()).addElement(whatever);
+                }
+            }
+        });
+
+        transferButton2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
+        clearTeamButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                defaultListModel.clear();
+                currentTeam.setModel(defaultListModel);
+            }
+        });
     }
 
 
 }
+
+
+
