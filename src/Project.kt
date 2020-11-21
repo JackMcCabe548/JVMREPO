@@ -4,8 +4,8 @@ import java.time.format.DateTimeFormatter
 data class Project(
     var name: String = "",
     var team: String = "",
-    var deadline: String = "",
-    var expectedFinishTime: String = ""
+    var startDate: String = "",
+    //var expectedFinishTime: String = ""
 ) {
     // TO DO - MARIO
 //    constructor() {
@@ -32,10 +32,12 @@ data class Project(
 
     class ProjectHandler() {
 
-        val projects = mutableListOf<Project>()
+        private val projects = mutableListOf<Project>()
 
-        fun createProject(name: String, team: String, deadline: String, expectedFinishTime: String): List<Project> {
-            projects.add(Project(name = name, team = team, deadline = deadline, expectedFinishTime = expectedFinishTime))
+        fun createProject(name: String, team: String, startDate: String): List<Project> {
+            projects.add(Project(name = name, team = team, startDate = startDate))
+            // , expectedFinishTime = expectedFinishTime add later on - MB
+            // expectedFinishTime: String
             return projects
         }
 

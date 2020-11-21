@@ -1,14 +1,13 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
 import java.util.List;
 
 public class GUI {
     private JTabbedPane tabs;
     private JPanel panel1;
     private JTextField txtProjectName;
-    private JTextField txtProjectDeadline;
+    private JTextField txtProjectStartDate;
     private JButton newTeamButton;
     private JComboBox savedTeams;
     private JList<Object> membersList;
@@ -30,6 +29,11 @@ public class GUI {
     private JButton transferButton2;
     private JButton clearTeamButton;
     private JButton clearTasksButton;
+    private JTextField txtTeamName;
+    private JLabel teamNameLbl;
+    private JLabel membersLbl;
+    private JLabel teamLeaderLbl;
+    private JLabel currentTeamLbl;
     private List<Project> projects;
     private Project.ProjectHandler handler;
     private DefaultListModel<String> defaultListModel = new DefaultListModel<String>();
@@ -38,25 +42,45 @@ public class GUI {
     public static void main(String[] args) {
         JFrame frame = new JFrame("Project Management");
         frame.setContentPane(new GUI().panel1);
+        frame.setSize(800,500);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
+        //frame.pack();
         frame.setVisible(true);
 
+    //TASKS: record duration of tasks(be able to record the successors of tasks
     }
     public GUI(){
+        teamNameLbl.setVisible(false);
+        txtTeamName.setVisible(false);
+        membersLbl.setVisible(false);
+        teamLeaderLbl.setVisible(false);
+        currentTeamLbl.setVisible(false);
+        teamLeaderList.setVisible(false);
+        membersList.setVisible(false);
+        currentTeam.setVisible(false);
+        transferButton1.setVisible(false);
+        clearTeamButton.setVisible(false);
+
 
         newTeamButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                teamNameLbl.setVisible(true);
+                txtTeamName.setVisible(true);
+                membersLbl.setVisible(true);
+                teamLeaderLbl.setVisible(true);
+                currentTeamLbl.setVisible(true);
+                teamLeaderList.setVisible(true);
+                membersList.setVisible(true);
+                currentTeam.setVisible(true);
+                transferButton1.setVisible(true);
             }
         });
 
         saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // to do tomorrow
-                //projects = handler.createProject(txtProjectName.getText(), txtProjectDeadline.getText(), )
+                projects = handler.createProject(txtProjectName.getText(), txtTeamName.getText(), txtProjectStartDate.getText());
             }
         });
 
