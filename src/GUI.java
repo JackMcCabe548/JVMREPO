@@ -35,7 +35,8 @@ public class GUI {
     private JLabel teamLeaderLbl;
     private JLabel currentTeamLbl;
     private List<Project> projects;
-    private Project.ProjectHandler handler;
+    private static  ProjectHandler handler = null;
+    private Project project;
     private DefaultListModel<String> defaultListModel = new DefaultListModel<String>();
     private DefaultListModel<String> model2 = new DefaultListModel<String>();
 
@@ -46,10 +47,14 @@ public class GUI {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //frame.pack();
         frame.setVisible(true);
+        handler.createFile();
 
     //TASKS: record duration of tasks(be able to record the successors of tasks
     }
     public GUI(){
+        handler = new ProjectHandler();
+
+
         teamNameLbl.setVisible(false);
         txtTeamName.setVisible(false);
         membersLbl.setVisible(false);
@@ -80,7 +85,12 @@ public class GUI {
         saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                projects = handler.createProject(txtProjectName.getText(), txtTeamName.getText(), txtProjectStartDate.getText());
+                // to save the project to a file
+                project = handler.createProject2(txtProjectName.getText(), txtTeamName.getText(), txtProjectStartDate.getText());
+                // to add the project to the list
+                //projects = handler.createProject(txtProjectName.getText(), txtTeamName.getText(), txtProjectStartDate.getText());
+                handler.save(project);
+
             }
         });
 
