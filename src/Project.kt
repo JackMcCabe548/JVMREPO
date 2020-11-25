@@ -1,12 +1,19 @@
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.io.File
+import java.io.IOException
+import java.nio.file.Files
+import java.nio.file.Paths
+import java.nio.file.StandardOpenOption
 
 
 data class Project(
     var name: String = "",
-    var team: String = "",
+    var teamName: String = "",
     var startDate: String = "",
+    //var teamMembers: String = "",
+//    var teamLeader: String = "",
+//    var projectTasks: String = ""
     //var expectedFinishTime: String = ""
 ) {
     // TO DO - MARIO
@@ -37,8 +44,8 @@ data class Project(
         private val projects = mutableListOf<Project>()
 
 
-        fun createProject(name: String, team: String, startDate: String): List<Project> {
-            projects.add(Project(name = name, team = team, startDate = startDate))
+        fun createProject(name: String, teamName: String, startDate: String): List<Project> {
+            projects.add(Project(name = name, teamName = teamName, startDate = startDate))
             // , expectedFinishTime = expectedFinishTime add later on - MB
             // expectedFinishTime: String
             return projects
@@ -46,16 +53,33 @@ data class Project(
 
         fun createProject2(
                 name: String,
-                team: String,
+                teamName: String,
                 startDate: String,
+                //teamMembers: String,
+//                teamLeader: String,
+//                projectTasks: String
         ) = Project(
-                name = if(name.isEmpty()) "Mario Bratanov" else name,
-                team = if(team.isEmpty()) "Team1" else team,
-                startDate = if(startDate.isEmpty()) "01/02/2020" else startDate,
+                name = if(name.isEmpty()) "ProjectA" else name,
+                teamName = if(teamName.isEmpty()) "TeamA" else teamName,
+                startDate = if(startDate.isEmpty()) "30/11/2020" else startDate,
+                //teamMembers = if(teamMembers.isEmpty()) "Empty" else teamMembers,
+//                teamLeader = if(teamLeader.isEmpty()) "None" else teamLeader,
+//                projectTasks = if(projectTasks.isEmpty()) "None" else projectTasks,
         )
 
-        fun save(project: Project){
+        fun saveToConsole(project: Project){
                 Persistence.createFilePersistence().save(project.toString())
+        }
+
+        fun saveToFile(project: Project){
+            val path = System.getProperty("user.dir") + "\\database.txt"
+            val text = project.toString()
+                try {
+                    Files.write(Paths.get(path), text.toByteArray(), StandardOpenOption.APPEND)
+                    println("Project successfully saved to database.txt file")
+                } catch (e: IOException) {
+                }
+
         }
 
         fun createFile() {
@@ -69,14 +93,15 @@ data class Project(
             }
         }
 
+        fun getDate(): String {
+            val current = LocalDateTime.now()
+            val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss.SSS")
+            val formatted = current.format(formatter)
+            return formatted
+        }
     }
 
-    fun getDate(): String {
-        val current = LocalDateTime.now()
-        val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss.SSS")
-        val formatted = current.format(formatter)
-        return formatted
-    }
+
 
 
 

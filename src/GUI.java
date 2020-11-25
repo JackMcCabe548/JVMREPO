@@ -1,6 +1,10 @@
+import com.toedter.calendar.JDateChooser;
+
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class GUI {
@@ -13,7 +17,7 @@ public class GUI {
     private JList<Object> membersList;
     private JList teamLeaderList;
     private JList currentTeam;
-    private JButton saveButton;
+    private JButton nextButton;
     private JComboBox savedProjects;
     private JButton newTaskButton;
     private JList allTasksList;
@@ -34,71 +38,61 @@ public class GUI {
     private JLabel membersLbl;
     private JLabel teamLeaderLbl;
     private JLabel currentTeamLbl;
+    private JButton saveAllButton;
+    private JButton transferButton3;
     private List<Project> projects;
     private static  ProjectHandler handler = null;
     private Project project;
     private DefaultListModel<String> defaultListModel = new DefaultListModel<String>();
-    private DefaultListModel<String> model2 = new DefaultListModel<String>();
+    private DefaultListModel<String> defaultListModel2 = new DefaultListModel<String>();
+    private DefaultListModel<String> defaultListModel3 = new DefaultListModel<String>();
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("Project Management");
         frame.setContentPane(new GUI().panel1);
-        frame.setSize(800,500);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //frame.pack();
+        frame.pack();
         frame.setVisible(true);
         handler.createFile();
 
-    //TASKS: record duration of tasks(be able to record the successors of tasks
     }
     public GUI(){
         handler = new ProjectHandler();
 
-
-        teamNameLbl.setVisible(false);
-        txtTeamName.setVisible(false);
-        membersLbl.setVisible(false);
-        teamLeaderLbl.setVisible(false);
-        currentTeamLbl.setVisible(false);
-        teamLeaderList.setVisible(false);
-        membersList.setVisible(false);
-        currentTeam.setVisible(false);
-        transferButton1.setVisible(false);
-        clearTeamButton.setVisible(false);
-
-
         newTeamButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                teamNameLbl.setVisible(true);
-                txtTeamName.setVisible(true);
-                membersLbl.setVisible(true);
-                teamLeaderLbl.setVisible(true);
-                currentTeamLbl.setVisible(true);
-                teamLeaderList.setVisible(true);
-                membersList.setVisible(true);
-                currentTeam.setVisible(true);
-                transferButton1.setVisible(true);
+
             }
         });
 
-        saveButton.addActionListener(new ActionListener() {
+        nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // to save the project to a file
-                project = handler.createProject2(txtProjectName.getText(), txtTeamName.getText(), txtProjectStartDate.getText());
-                // to add the project to the list
-                //projects = handler.createProject(txtProjectName.getText(), txtTeamName.getText(), txtProjectStartDate.getText());
-                handler.save(project);
-
+                tabs.setSelectedIndex(1);
             }
         });
 
         newTaskButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String message = JOptionPane.showInputDialog("New task:");
-                ((DefaultListModel)allTasksList.getModel()).addElement(message);
+                JTextField textField1 = new JTextField();
+
+                JDateChooser dateChooser = new JDateChooser();
+                dateChooser.setFont(new Font("Tahoma", Font.PLAIN, 20));
+
+                Object[] inputs = {"Name of Task:", textField1, "Starting date: ", dateChooser};
+
+                int inputDialog = JOptionPane.showConfirmDialog(panel1, inputs, "New Task",
+                        JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
+
+                if (inputDialog == JOptionPane.OK_OPTION) {
+                    String s="";
+                    SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+                    s=sdf.format(((JDateChooser)inputs[2]).getDate());
+                    String text = textField1.getText() + "\n" + " - " + s.toString();
+                    ((DefaultListModel)allTasksList.getModel()).addElement(text);
+                }
             }
         });
 
@@ -117,11 +111,23 @@ public class GUI {
         transferButton2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                currentTeam.setModel(model2);
+                currentTeam.setModel(defaultListModel2);
                 int[] selectedIndices = allTasksList.getSelectedIndices();
+                for (int selectedIndex : selectedIndices) {
+                    Object whatever = allTasksList.getModel().getElementAt(selectedIndex);
+                    ((DefaultListModel) completedTasksList.getModel()).addElement(whatever);
+                }
+            }
+        });
+
+        transferButton3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                teamLeaderList.setModel(defaultListModel3);
+                int[] selectedIndices = currentTeam.getSelectedIndices();
                 for(int i=0; i < selectedIndices.length; i++) {
-                    Object whatever = allTasksList.getModel().getElementAt(selectedIndices[i]);
-                    ((DefaultListModel)completedTasksList.getModel()).addElement(whatever);
+                    Object whatever = currentTeam.getModel().getElementAt(selectedIndices[i]);
+                    ((DefaultListModel)teamLeaderList.getModel()).addElement(whatever);
                 }
             }
         });
@@ -130,15 +136,17 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 defaultListModel.clear();
+                defaultListModel3.clear();
                 currentTeam.setModel(defaultListModel);
+                teamLeaderList.setModel(defaultListModel3);
             }
         });
 
         clearTasksButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                model2.clear();
-                completedTasksList.setModel(model2);
+                defaultListModel2.clear();
+                completedTasksList.setModel(defaultListModel2);
             }
         });
 
@@ -151,6 +159,25 @@ public class GUI {
 //                ((DefaultListModel)allTasksList.getModel()).addElement(s);
             }
         });
+
+        saveAllButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(currentTeam != null){
+                    System.out.println("Team members: ");
+                    for (int i = 0; i < currentTeam.getModel().getSize(); i++) {
+                        System.out.println(currentTeam.getModel().getElementAt(i));
+                    }
+                }else {
+                    System.out.println("Team members haven't been picked yet!");
+                }
+
+                project = handler.createProject2(txtProjectName.getText(), txtTeamName.getText(), txtProjectStartDate.getText());
+                handler.saveToConsole(project);
+                handler.saveToFile(project);
+            }
+        });
+
     }
 
 }
