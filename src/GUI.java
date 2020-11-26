@@ -53,6 +53,7 @@ public class GUI {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+
         handler.createFile();
 
     }
@@ -76,6 +77,7 @@ public class GUI {
         newTaskButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // all code for the dialog box for task choosing
                 JTextField textField1 = new JTextField();
 
                 JDateChooser dateChooser = new JDateChooser();
@@ -89,8 +91,8 @@ public class GUI {
                 if (inputDialog == JOptionPane.OK_OPTION) {
                     String s="";
                     SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-                    s=sdf.format(((JDateChooser)inputs[2]).getDate());
-                    String text = textField1.getText() + "\n" + " - " + s.toString();
+                    s=sdf.format(((JDateChooser)inputs[3]).getDate());
+                    String text = textField1.getText() + "\n" + " - " + s;
                     ((DefaultListModel)allTasksList.getModel()).addElement(text);
                 }
             }
@@ -175,9 +177,17 @@ public class GUI {
                 project = handler.createProject2(txtProjectName.getText(), txtTeamName.getText(), txtProjectStartDate.getText());
                 handler.saveToConsole(project);
                 handler.saveToFile(project);
+                savedProjects.addItem(txtProjectName.getText());
+                savedTeams.addItem(txtTeamName.getText());
             }
         });
 
+        savedTeams.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
     }
 
 }

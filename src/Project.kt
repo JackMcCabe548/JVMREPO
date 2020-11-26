@@ -11,10 +11,6 @@ data class Project(
     var name: String = "",
     var teamName: String = "",
     var startDate: String = "",
-    //var teamMembers: String = "",
-//    var teamLeader: String = "",
-//    var projectTasks: String = ""
-    //var expectedFinishTime: String = ""
 ) {
     // TO DO - MARIO
 //    constructor() {
@@ -43,48 +39,38 @@ data class Project(
 
         private val projects = mutableListOf<Project>()
 
-
-        fun createProject(name: String, teamName: String, startDate: String): List<Project> {
+        fun createProject(name: String, teamName: String, startDate: String): List<Project> { // create project in list
             projects.add(Project(name = name, teamName = teamName, startDate = startDate))
             // , expectedFinishTime = expectedFinishTime add later on - MB
             // expectedFinishTime: String
             return projects
         }
 
-        fun createProject2(
-                name: String,
-                teamName: String,
-                startDate: String,
-                //teamMembers: String,
-//                teamLeader: String,
-//                projectTasks: String
-        ) = Project(
+        fun createProject2(name: String, teamName: String, startDate: String, ) = Project( // create project fun for persistence
                 name = if(name.isEmpty()) "ProjectA" else name,
                 teamName = if(teamName.isEmpty()) "TeamA" else teamName,
                 startDate = if(startDate.isEmpty()) "30/11/2020" else startDate,
-                //teamMembers = if(teamMembers.isEmpty()) "Empty" else teamMembers,
-//                teamLeader = if(teamLeader.isEmpty()) "None" else teamLeader,
-//                projectTasks = if(projectTasks.isEmpty()) "None" else projectTasks,
         )
 
-        fun saveToConsole(project: Project){
+        fun saveToConsole(project: Project){ // save project and output to console
                 Persistence.createFilePersistence().save(project.toString())
         }
 
-        fun saveToFile(project: Project){
+        fun saveToFile(project: Project){ // save project to file
             val path = System.getProperty("user.dir") + "\\database.txt"
             val text = project.toString()
                 try {
                     Files.write(Paths.get(path), text.toByteArray(), StandardOpenOption.APPEND)
-                    println("Project successfully saved to database.txt file")
+                    println("Project successfully saved to database.txt")
                 } catch (e: IOException) {
+                    println(e.stackTrace)
                 }
 
         }
 
-        fun createFile() {
+        fun createFile() { // create new file or check for existing
             val fileName = "database.txt"
-            var file = File(fileName)
+            val file = File(fileName)
             val isNewFileCreated: Boolean = file.createNewFile()
             if (isNewFileCreated) {
                 println("$fileName is created successfully.")
@@ -93,11 +79,10 @@ data class Project(
             }
         }
 
-        fun getDate(): String {
+        fun getDate(): String { // get the current date in chosen format
             val current = LocalDateTime.now()
             val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss.SSS")
-            val formatted = current.format(formatter)
-            return formatted
+            return current.format(formatter)
         }
     }
 
