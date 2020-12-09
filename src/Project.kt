@@ -41,8 +41,6 @@ data class Project(
 
         fun createProject(name: String, teamName: String, startDate: String): List<Project> { // create project in list
             projects.add(Project(name = name, teamName = teamName, startDate = startDate))
-            // , expectedFinishTime = expectedFinishTime add later on - MB
-            // expectedFinishTime: String
             return projects
         }
 

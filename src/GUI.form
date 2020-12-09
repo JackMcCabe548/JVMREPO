@@ -70,7 +70,9 @@
                   <grid row="3" column="4" row-span="1" col-span="3" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <model/>
+                  <model>
+                    <item value="Team Alpha"/>
+                  </model>
                 </properties>
               </component>
               <component id="b5642" class="javax.swing.JList" binding="membersList">
@@ -86,26 +88,6 @@
                     <item value="Mahamud"/>
                     <item value="Jack"/>
                     <item value="Jordan"/>
-                    <item value="sasasa"/>
-                    <item value="sasasas"/>
-                    <item value="s"/>
-                    <item value="s"/>
-                    <item value="sasasas"/>
-                    <item value="as"/>
-                    <item value="as"/>
-                    <item value="as"/>
-                    <item value="a"/>
-                    <item value="sa"/>
-                    <item value="s"/>
-                    <item value="as"/>
-                    <item value="a"/>
-                    <item value="sa"/>
-                    <item value="s"/>
-                    <item value="as"/>
-                    <item value="a"/>
-                    <item value="sa"/>
-                    <item value="s"/>
-                    <item value="as"/>
                   </model>
                   <name value="Members"/>
                   <toolTipText value=""/>
@@ -227,10 +209,9 @@
                 </constraints>
                 <properties>
                   <model>
-                    <item value="Mario"/>
-                    <item value="Misho"/>
-                    <item value="Nikola"/>
-                    <item value="Miglen"/>
+                    <item value="Project1"/>
+                    <item value="Project2"/>
+                    <item value="Project3"/>
                   </model>
                 </properties>
               </component>
@@ -247,7 +228,7 @@
                   <grid row="2" column="1" row-span="1" col-span="4" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <text value="Track Progress"/>
+                  <text value="Task Management"/>
                 </properties>
               </component>
               <component id="e38be" class="javax.swing.JList" binding="allTasksList">

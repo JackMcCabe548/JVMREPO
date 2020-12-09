@@ -43,6 +43,8 @@ public class GUI {
     private List<Project> projects;
     private static  ProjectHandler handler = null;
     private Project project;
+    private CriticalPath criticalPath;
+    private CriticalPath.TaskHandler taskHandler;
     private DefaultListModel<String> defaultListModel = new DefaultListModel<String>();
     private DefaultListModel<String> defaultListModel2 = new DefaultListModel<String>();
     private DefaultListModel<String> defaultListModel3 = new DefaultListModel<String>();
@@ -59,6 +61,24 @@ public class GUI {
     }
     public GUI(){
         handler = new ProjectHandler();
+        JTextField textField1 = new JTextField();
+
+
+        JDateChooser dateChooser = new JDateChooser();
+        dateChooser.setFont(new Font("Tahoma", Font.PLAIN, 20));
+
+        Object[] inputs = {"Name of Task:", textField1, "Starting date: ", dateChooser};
+
+        int inputDialog = JOptionPane.showConfirmDialog(panel1, inputs, "New Task",
+                JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
+
+        if (inputDialog == JOptionPane.OK_OPTION) {
+            String s="";
+            SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+            s=sdf.format(((JDateChooser)inputs[3]).getDate());
+            String text = textField1.getText() + "\n" + " - " + s;
+            ((DefaultListModel)allTasksList.getModel()).addElement(text);
+        }
 
         newTeamButton.addActionListener(new ActionListener() {
             @Override
@@ -79,6 +99,7 @@ public class GUI {
             public void actionPerformed(ActionEvent e) {
                 // all code for the dialog box for task choosing
                 JTextField textField1 = new JTextField();
+
 
                 JDateChooser dateChooser = new JDateChooser();
                 dateChooser.setFont(new Font("Tahoma", Font.PLAIN, 20));
