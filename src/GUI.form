@@ -3,7 +3,7 @@
   <grid id="27dc6" binding="panel1" default-binding="true" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="true" same-size-vertically="true" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="867" height="747"/>
+      <xy x="20" y="20" width="1020" height="747"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -17,7 +17,7 @@
         <properties/>
         <border type="none"/>
         <children>
-          <grid id="e0580" binding="tab1" layout-manager="GridLayoutManager" row-count="9" column-count="9" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="e0580" binding="tab1" layout-manager="GridLayoutManager" row-count="8" column-count="14" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <tabbedpane title="Main"/>
@@ -25,59 +25,9 @@
             <properties/>
             <border type="none"/>
             <children>
-              <component id="7eb6" class="javax.swing.JLabel" binding="projectNameLabel">
-                <constraints>
-                  <grid row="1" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="Project name:"/>
-                </properties>
-              </component>
-              <component id="ea06e" class="javax.swing.JTextField" binding="txtProjectName">
-                <constraints>
-                  <grid row="1" column="4" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                    <preferred-size width="150" height="-1"/>
-                  </grid>
-                </constraints>
-                <properties/>
-              </component>
-              <component id="1dde0" class="javax.swing.JLabel" binding="projectDeadlineLabel">
-                <constraints>
-                  <grid row="2" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="Project start date:"/>
-                </properties>
-              </component>
-              <component id="60c82" class="javax.swing.JTextField" binding="txtProjectStartDate">
-                <constraints>
-                  <grid row="2" column="4" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                    <preferred-size width="150" height="-1"/>
-                  </grid>
-                </constraints>
-                <properties/>
-              </component>
-              <component id="499b3" class="javax.swing.JButton" binding="newTeamButton">
-                <constraints>
-                  <grid row="3" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="Set up a New Team"/>
-                </properties>
-              </component>
-              <component id="2bda6" class="javax.swing.JComboBox" binding="savedTeams">
-                <constraints>
-                  <grid row="3" column="4" row-span="1" col-span="3" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <model>
-                    <item value="Team Alpha"/>
-                  </model>
-                </properties>
-              </component>
               <component id="b5642" class="javax.swing.JList" binding="membersList">
                 <constraints>
-                  <grid row="6" column="0" row-span="2" col-span="3" vsize-policy="6" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                  <grid row="5" column="0" row-span="2" col-span="6" vsize-policy="6" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="50"/>
                   </grid>
                 </constraints>
@@ -87,7 +37,6 @@
                     <item value="Mario"/>
                     <item value="Mahamud"/>
                     <item value="Jack"/>
-                    <item value="Jordan"/>
                   </model>
                   <name value="Members"/>
                   <toolTipText value=""/>
@@ -95,7 +44,7 @@
               </component>
               <component id="59e6a" class="javax.swing.JList" binding="teamLeaderList">
                 <constraints>
-                  <grid row="6" column="4" row-span="2" col-span="1" vsize-policy="6" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                  <grid row="5" column="9" row-span="2" col-span="1" vsize-policy="6" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="50"/>
                   </grid>
                 </constraints>
@@ -103,7 +52,7 @@
               </component>
               <component id="275dc" class="javax.swing.JList" binding="currentTeam">
                 <constraints>
-                  <grid row="6" column="6" row-span="2" col-span="1" vsize-policy="6" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                  <grid row="5" column="11" row-span="2" col-span="1" vsize-policy="6" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="50"/>
                   </grid>
                 </constraints>
@@ -113,7 +62,7 @@
               </component>
               <component id="a606a" class="javax.swing.JButton" binding="nextButton">
                 <constraints>
-                  <grid row="6" column="8" row-span="2" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="5" column="13" row-span="2" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <text value="Next"/>
@@ -121,15 +70,15 @@
               </component>
               <component id="811ea" class="javax.swing.JLabel" binding="newProjectLabel">
                 <constraints>
-                  <grid row="0" column="4" row-span="1" col-span="5" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="11" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <text value="Set up a New Project"/>
+                  <text value=""/>
                 </properties>
               </component>
               <component id="aba7d" class="javax.swing.JLabel" binding="membersLbl">
                 <constraints>
-                  <grid row="5" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="4" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <text value="Members"/>
@@ -137,7 +86,7 @@
               </component>
               <component id="6333f" class="javax.swing.JLabel" binding="teamLeaderLbl">
                 <constraints>
-                  <grid row="5" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="4" column="9" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <text value="Team Leader"/>
@@ -145,7 +94,7 @@
               </component>
               <component id="458fd" class="javax.swing.JLabel" binding="currentTeamLbl">
                 <constraints>
-                  <grid row="5" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="4" column="11" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <text value="Current Team"/>
@@ -153,7 +102,7 @@
               </component>
               <component id="3bb80" class="javax.swing.JButton" binding="transferButton1">
                 <constraints>
-                  <grid row="6" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="5" column="8" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <text value="&gt;&gt;"/>
@@ -161,7 +110,7 @@
               </component>
               <component id="a27ea" class="javax.swing.JButton" binding="clearTeamButton" default-binding="true">
                 <constraints>
-                  <grid row="8" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="7" column="11" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <text value="Clear Team"/>
@@ -169,7 +118,7 @@
               </component>
               <component id="a2883" class="javax.swing.JLabel" binding="teamNameLbl">
                 <constraints>
-                  <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <text value="Team name:"/>
@@ -177,7 +126,7 @@
               </component>
               <component id="db2f7" class="javax.swing.JTextField" binding="txtTeamName">
                 <constraints>
-                  <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                  <grid row="3" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="-1"/>
                   </grid>
                 </constraints>
@@ -187,15 +136,41 @@
               </component>
               <component id="d18ec" class="javax.swing.JButton" binding="transferButton3">
                 <constraints>
-                  <grid row="6" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="5" column="10" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <text value="&lt;&lt;"/>
                 </properties>
               </component>
+              <component id="5b77f" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Saved teams:"/>
+                </properties>
+              </component>
+              <component id="2bda6" class="javax.swing.JComboBox" binding="savedTeams">
+                <constraints>
+                  <grid row="2" column="1" row-span="1" col-span="3" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <model>
+                    <item value="Team Alpha"/>
+                  </model>
+                </properties>
+              </component>
+              <component id="95fe6" class="javax.swing.JButton" binding="newProjectButton" default-binding="true">
+                <constraints>
+                  <grid row="1" column="5" row-span="1" col-span="5" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="New Project"/>
+                </properties>
+              </component>
             </children>
           </grid>
-          <grid id="9fa0e" binding="tab2" layout-manager="GridLayoutManager" row-count="6" column-count="6" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="9fa0e" binding="tab2" layout-manager="GridLayoutManager" row-count="5" column-count="7" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <tabbedpane title="Project Management"/>
@@ -205,27 +180,15 @@
             <children>
               <component id="33700" class="javax.swing.JComboBox" binding="savedProjects">
                 <constraints>
-                  <grid row="0" column="1" row-span="1" col-span="4" vsize-policy="0" hsize-policy="2" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="1" row-span="1" col-span="5" vsize-policy="0" hsize-policy="2" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <model>
-                    <item value="Project1"/>
-                    <item value="Project2"/>
-                    <item value="Project3"/>
-                  </model>
-                </properties>
-              </component>
-              <component id="4f8ba" class="javax.swing.JButton" binding="newTaskButton" default-binding="true">
-                <constraints>
-                  <grid row="1" column="1" row-span="1" col-span="4" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="New Task"/>
+                  <model/>
                 </properties>
               </component>
               <component id="a44e3" class="javax.swing.JLabel" binding="trackProgressLabel">
                 <constraints>
-                  <grid row="2" column="1" row-span="1" col-span="4" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="1" column="2" row-span="1" col-span="4" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <text value="Task Management"/>
@@ -233,20 +196,25 @@
               </component>
               <component id="e38be" class="javax.swing.JList" binding="allTasksList">
                 <constraints>
-                  <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                  <grid row="3" column="1" row-span="1" col-span="2" vsize-policy="6" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="50"/>
                   </grid>
                 </constraints>
                 <properties>
                   <model>
-                    <item value="TaskA"/>
-                    <item value="TaskB"/>
+                    <item value="ZLast - 0"/>
+                    <item value="D - 2 - ZLast"/>
+                    <item value="B - 3 - ZLast"/>
+                    <item value="C - 4 - D, B"/>
+                    <item value="E - 2 - B, C"/>
+                    <item value="F - 3 - D"/>
+                    <item value="AFirst - 0 - E"/>
                   </model>
                 </properties>
               </component>
               <component id="2193a" class="javax.swing.JList" binding="completedTasksList">
                 <constraints>
-                  <grid row="4" column="3" row-span="1" col-span="1" vsize-policy="6" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                  <grid row="3" column="4" row-span="1" col-span="1" vsize-policy="6" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="50"/>
                   </grid>
                 </constraints>
@@ -256,7 +224,7 @@
               </component>
               <component id="d5d2a" class="javax.swing.JTextArea" binding="criticalPathTxtArea">
                 <constraints>
-                  <grid row="4" column="4" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                  <grid row="3" column="5" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="50"/>
                   </grid>
                 </constraints>
@@ -264,7 +232,7 @@
               </component>
               <component id="c3bd4" class="javax.swing.JLabel">
                 <constraints>
-                  <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="2" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <text value="All Tasks"/>
@@ -272,7 +240,7 @@
               </component>
               <component id="22dd6" class="javax.swing.JLabel">
                 <constraints>
-                  <grid row="3" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="2" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <text value="Completed Tasks"/>
@@ -280,15 +248,15 @@
               </component>
               <component id="7941b" class="javax.swing.JLabel">
                 <constraints>
-                  <grid row="3" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="2" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <text value="Label"/>
+                  <text value="Critical Path"/>
                 </properties>
               </component>
               <component id="3cbb4" class="javax.swing.JButton" binding="transferButton2">
                 <constraints>
-                  <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="3" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <text value="&gt;&gt;"/>
@@ -296,7 +264,7 @@
               </component>
               <component id="31465" class="javax.swing.JButton" binding="clearTasksButton" default-binding="true">
                 <constraints>
-                  <grid row="5" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="4" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <text value="Clear Tasks"/>
@@ -312,10 +280,18 @@
               </component>
               <component id="3ef50" class="javax.swing.JButton" binding="saveAllButton">
                 <constraints>
-                  <grid row="4" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="3" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <text value="Save all"/>
+                </properties>
+              </component>
+              <component id="4f8ba" class="javax.swing.JButton" binding="newTaskButton" default-binding="true">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="New Task"/>
                 </properties>
               </component>
             </children>

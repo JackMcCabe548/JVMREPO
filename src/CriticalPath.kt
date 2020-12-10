@@ -1,188 +1,97 @@
-import java.util.*
-
+/*Ideas for the critical path algorithm and the task handler class:
+https://www.youtube.com/watch?v=4oDLMs11Exs
+https://www.youtube.com/watch?v=jmCc5VIMOro
+https://stackoverflow.com/questions/2985317/critical-path-method-algorithm
+https://www.workamajig.com/blog/critical-path-method#:~:text=The%20Critical%20Path%20Algorithm%20Explained,critical%22%20for%20the%20project).
+*/
 
 object CriticalPath {
-    var maxCost = 0
-    var format = "%1$-10s %2$-5s %3$-5s %4$-5s %5$-5s %6$-5s %7$-10s\n"
-    @JvmStatic
-    fun main(args: Array<String>) {
-        // The example dependency graph
-        val allTasks = HashSet<TaskHandler>()
+     @JvmStatic
+     fun main(args: Array<String>) {
+         // Given dependency graph
+         val last = TaskHandler("ZLast", 0)
+         val D = TaskHandler("D", 2, last)
+         val B = TaskHandler("B", 3, last)
+         val C = TaskHandler("C", 4, D, B)
+         val E = TaskHandler("E", 2, B, C)
+         val F = TaskHandler("F", 3, D)
+         val first = TaskHandler("AFirst", 0, E)
+         val allTasks = hashSetOf(last, D, B, C, E, F, first)
 
-        val A = TaskHandler("A", 3)
-        val B = TaskHandler("B", 1, A)
-        val C = TaskHandler("C", 2, A, B)
-        val D = TaskHandler("D", 4, C)
-        val E = TaskHandler("E", 4, B, D)
-        val F = TaskHandler("F", 3)
-        val G = TaskHandler("G", 5, B)
+         calculateCP(allTasks)
+         printFormatted(allTasks)
+     }
 
-        allTasks.add(A)
-        allTasks.add(B)
-        allTasks.add(C)
-        allTasks.add(D)
-        allTasks.add(E)
-        allTasks.add(F)
-        allTasks.add(G)
-        val result = criticalPath(allTasks)
-        print(result)
-        // System.out.println("Critical Path: " + Arrays.toString(result));
-    }
+     fun calculateCP(taskHandlers: Collection<TaskHandler>) {
+         val calculatedTasks = hashSetOf<TaskHandler>() //set of calculated tasks
 
-    fun criticalPath(tasks: Set<TaskHandler>): Array<TaskHandler> {
-        // tasks whose critical cost has been calculated
-        val completed = HashSet<TaskHandler>()
-        // tasks whose critical cost needs to be calculated
-        val remaining = HashSet(tasks)
+         val remainingTasks = taskHandlers.toHashSet() //remaining tasks to calculate
 
-        // Backflow algorithm
-        // while there are tasks whose critical cost isn't calculated.
-        while (!remaining.isEmpty()) {
-            var progress = false
 
-            // find a new task to calculate
-            val it = remaining.iterator()
-            while (it.hasNext()) {
-                val task = it.next()
-                if (completed.containsAll(task.dependencies)) {
-                    // all dependencies calculated, critical cost is max
-                    // dependency
-                    // critical cost, plus our cost
-                    var critical = 0
-                    for (t in task.dependencies) {
-                        if (t.criticalCost > critical) {
-                            critical = t.criticalCost
-                        }
-                    }
-                    task.criticalCost = critical + task.cost
-                    // set task as calculated an remove
-                    completed.add(task)
-                    it.remove()
-                    // note we are making progress
-                    progress = true
-                }
-            }
-            // If we haven't made any progress then a cycle must exist in
-            // the graph and we wont be able to calculate the critical path
-            if (!progress) throw RuntimeException("Cyclic dependency, algorithm stopped!")
-        }
+         // while there are remaining tasks to be calculated:
+         while (remainingTasks.isNotEmpty()) {
+             var progress = false
 
-        // get the cost
-        maxCost(tasks)
-        val initialNodes = initials(tasks)
-        calculateEarly(initialNodes)
+             // find a new task to calculate
+             val it = remainingTasks.iterator()
+             while (it.hasNext()) { // while there are tasks iterating
+                 val task = it.next() //set task to the next remaining
 
-        // get the tasks
-        val ret = completed.toTypedArray()
-        // create a priority list
-        Arrays.sort(ret) { o1, o2 -> o1.name.compareTo(o2.name) }
-        return ret
-    }
+                 if (calculatedTasks.containsAll(task.dependencies)) { //if all are calculated
+                     /*get the largest element from the map of dependencies and its critical
+                    cost and add the current cost of this task*/
+                     val critical = task.dependencies.map { it.criticalCost }.maxOrNull() ?: 0
+                     task.criticalCost = critical + task.cost
 
-    fun calculateEarly(initials: HashSet<TaskHandler>) {
-        for (initial in initials) {
-            initial.earlyStart = 0
-            initial.earlyFinish = initial.cost
-            setEarly(initial)
-        }
-    }
+                     // add task to calculatedtasks and remove from iteration
+                     calculatedTasks.add(task)
+                     it.remove()
 
-    fun setEarly(initial: TaskHandler) {
-        val completionTime = initial.earlyFinish
-        for (t in initial.dependencies) {
-            if (completionTime >= t.earlyStart) {
-                t.earlyStart = completionTime
-                t.earlyFinish = completionTime + t.cost
-            }
-            setEarly(t)
-        }
-    }
+                     // track progress
+                     progress = true
+                 }
+             }
+             // catch error if progress hasn't been made (cycle still exists)
+             if (!progress) throw RuntimeException("The algorithm has been interrupted. Check the progress!")
+         }
 
-    fun initials(tasks: Set<TaskHandler>): HashSet<TaskHandler> {
-        val remaining = HashSet(tasks)
-        for (t in tasks) {
-            for (td in t.dependencies) {
-                remaining.remove(td)
-            }
-        }
-        print("Initial nodes: ")
-        for (t in remaining) print(t.name + " ")
-        print("\n\n")
-        return remaining
-    }
+         // get the largest cost from the list and print it out to console
+         val totalCost = taskHandlers.map { it.criticalCost }.maxOrNull() ?: -1
+         println("Critical path's total duration (cost): $totalCost")
 
-    fun maxCost(tasks: Set<TaskHandler>) {
-        var max = -1
-        for (t in tasks) {
-            if (t.criticalCost > max) max = t.criticalCost
-        }
-        maxCost = max
-        println("Critical path length (cost): " + maxCost)
-        for (t in tasks) {
-            t.setLatest()
-        }
-    }
+         calculateLatest(taskHandlers, totalCost)
+         calculateEarly(taskHandlers)
+     }
 
-    fun print(tasks: Array<TaskHandler>) {
-        System.out.format(format, "Task", "ES", "EF", "LS", "LF", "Slack", "Critical?")
-        for (t in tasks) System.out.format(format, *t.toStringArray())
-    }
 
-    // A wrapper class to hold the tasks during the calculation
-    class TaskHandler(// a name for the task for printing
-            var name: String, // the actual cost of the task
-            var cost: Int, vararg dependencies: TaskHandler) {
-        // the cost of the task along the critical path
-        var criticalCost = 0
+     //calculate LS and LF for each
+     fun calculateLatest(taskHandlers: Collection<TaskHandler>, maxCost: Int) = taskHandlers.forEach {
+         it.setLatest(maxCost)
+     }
 
-        // the earliest start
-        var earlyStart = 0
+     //calculate ES and EF for each
+     fun calculateEarly(taskHandlers: Collection<TaskHandler>) = initialNodes(taskHandlers).forEach {
+         it.eS = 0
+         it.eF = it.cost
+         it.setEarlyForDependencies()
+     }
 
-        // the earliest finish
-        var earlyFinish: Int
+     //get the initial node/s of the algorithm
+     fun initialNodes(taskHandlers: Collection<TaskHandler>): Collection<TaskHandler> {
+         val dependencies = taskHandlers.flatMap { it.dependencies }.toSet()
+         // return filtered list only with the tasks which are in dependencies list also
+         return taskHandlers.filter { it !in dependencies }.also {
+             println("Initial nodes: ${it.joinToString { node -> node.name }}\n")
+         }
+     }
 
-        // the latest start
-        var latestStart = 0
-
-        // the latest finish
-        var latestFinish = 0
-
-        fun createTask(name: String, cost: Int ) = TaskHandler( // create project fun for persistence
-                name = if(name.isEmpty()) "Task1" else name,
-                cost = if(cost < 0) 0 else cost
-        )
-
-        // the tasks on which this task is dependant
-        var dependencies = HashSet<TaskHandler>()
-        fun setLatest() {
-            latestStart = maxCost - criticalCost
-            latestFinish = latestStart + cost
-        }
-
-        fun toStringArray(): Array<String?> {
-            val criticalCond = if (earlyStart == latestStart) "Yes" else "No"
-            return arrayOf(name, earlyStart.toString() + "", earlyFinish.toString() + "", latestStart.toString() + "", latestFinish.toString() + "", (latestStart - earlyStart).toString() + "", criticalCond)
-        }
-
-        fun isDependent(t: TaskHandler): Boolean {
-            // is t a direct dependency?
-            if (dependencies.contains(t)) {
-                return true
-            }
-            // is t an indirect dependency
-            for (dep in dependencies) {
-                if (dep.isDependent(t)) {
-                    return true
-                }
-            }
-            return false
-        }
-
-        init {
-            for (t in dependencies) {
-                this.dependencies.add(t)
-            }
-            earlyFinish = -1
-        }
-    }
-}
+     fun printFormatted(taskHandlers: Collection<TaskHandler>) {
+         val format = "%1$-10s %2$-5s %3$-5s %4$-5s %5$-5s %6$-5s %7$-10s\n"
+         System.out.format(format, "Task", "ES", "EF", "LS", "LF", "Slack", "Part of the critical path?")
+         taskHandlers.sortedWith { o1, o2 -> o1.name.compareTo(o2.name) }.forEach {
+             System.out.format(format, it.name, it.eS, it.eF, it.lS, it.lF, (it.lS - it.eS),
+                     if (it.isCritical()) "Yes" else "No" // check if task is part of the critical path
+             )
+         }
+     }
+ }
