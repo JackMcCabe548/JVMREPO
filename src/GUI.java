@@ -60,32 +60,6 @@ public class GUI {
 
         criticalPathTxtArea.setText("Critical path's total duration (cost): 9");
 
-        nextButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                tabs.setSelectedIndex(1);
-            }
-        });
-
-        newTaskButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JTextField textField1 = new JTextField();
-                JTextField textField2 = new JTextField();
-                JTextField textField3 = new JTextField();
-
-                Object[] inputs = {"Name of task:", textField1, "Cost of task:", textField2, "Predecessor:", textField3};
-
-                int inputDialog = JOptionPane.showConfirmDialog(panel1, inputs, "New Task",
-                        JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
-
-                if (inputDialog == JOptionPane.OK_OPTION) {
-                    String text = textField1.getText() + "\n" + " - " + textField2.getText() + " - " + textField3.getText();
-                    ((DefaultListModel)allTasksList.getModel()).addElement(text);
-                }
-            }
-        });
-
         transferButton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -122,6 +96,45 @@ public class GUI {
             }
         });
 
+        newProjectButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JTextField textField1 = new JTextField();
+                JTextField textField2 = new JTextField();
+
+                JDateChooser dateChooser = new JDateChooser();
+                dateChooser.setFont(new Font("Tahoma", Font.PLAIN, 20));
+
+                Object[] inputs = {"Name of project:", textField1, "Name of the team:", textField2,  "Starting date: ", dateChooser};
+
+                int inputDialog = JOptionPane.showConfirmDialog(panel1, inputs, "New Project",
+                        JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
+
+                if (inputDialog == JOptionPane.OK_OPTION) {
+                    String s="";
+                    SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+                    s=sdf.format(((JDateChooser)inputs[5]).getDate());
+                    String text = textField1.getText() + "\n" + " - " + s;
+                    project = handler.createProject2(textField1.getText(), textField2.getText(), s);
+
+                }
+            }
+        });
+
+        savedTeams.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
+        nextButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                tabs.setSelectedIndex(1);
+            }
+        });
+
         clearTeamButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -140,13 +153,22 @@ public class GUI {
             }
         });
 
-        savedProjects.addActionListener(new ActionListener() {
+        newTaskButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Not needed functionality now - Mario
-//                String s = (String)savedProjects.getSelectedItem();
-//                completedTasksList.setModel(model2);
-//                ((DefaultListModel)allTasksList.getModel()).addElement(s);
+                JTextField textField1 = new JTextField();
+                JTextField textField2 = new JTextField();
+                JTextField textField3 = new JTextField();
+
+                Object[] inputs = {"Name of task:", textField1, "Cost of task:", textField2, "Predecessor:", textField3};
+
+                int inputDialog = JOptionPane.showConfirmDialog(panel1, inputs, "New Task",
+                        JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
+
+                if (inputDialog == JOptionPane.OK_OPTION) {
+                    String text = textField1.getText() + "\n" + " - " + textField2.getText() + " - " + textField3.getText();
+                    ((DefaultListModel)allTasksList.getModel()).addElement(text);
+                }
             }
         });
 
@@ -173,39 +195,7 @@ public class GUI {
 
             }
         });
-
-        savedTeams.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
-        newProjectButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JTextField textField1 = new JTextField();
-                JTextField textField2 = new JTextField();
-
-                JDateChooser dateChooser = new JDateChooser();
-                dateChooser.setFont(new Font("Tahoma", Font.PLAIN, 20));
-
-                Object[] inputs = {"Name of project:", textField1, "Name of the team:", textField2,  "Starting date: ", dateChooser};
-
-                int inputDialog = JOptionPane.showConfirmDialog(panel1, inputs, "New Project",
-                        JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
-
-                if (inputDialog == JOptionPane.OK_OPTION) {
-                    String s="";
-                    SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-                    s=sdf.format(((JDateChooser)inputs[5]).getDate());
-                    String text = textField1.getText() + "\n" + " - " + s;
-                    project = handler.createProject2(textField1.getText(), textField2.getText(), s);
-
-                }
-            }
-        });
     }
-
 }
 
 

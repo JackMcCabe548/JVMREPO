@@ -7,35 +7,12 @@ import java.nio.file.Paths
 import java.nio.file.StandardOpenOption
 
 
-data class Project(
+data class Project( // data class to hold the attributes for each project
     var name: String = "",
     var teamName: String = "",
     var startDate: String = "",
-) {
-    // TO DO - MARIO
-//    constructor() {
-//    }
-
-//    override fun equals(other: Any?): Boolean {
-//        if (this === other) return true
-//        if (javaClass != other?.javaClass) return false
-//
-//        other as Project
-//
-//        if (id != other.id) return false
-//
-//        return true
-//    }
-//
-//    override fun hashCode(): Int {
-//        return id
-//    }
-//
-//    override fun toString(): String {
-//        return "Person(id=$id, name='$name', age=$age, address=$address)"
-//    }
-}
-    class ProjectHandler() {
+){}
+    class ProjectHandler() { // handler class
 
         private val projects = mutableListOf<Project>()
 
@@ -44,7 +21,7 @@ data class Project(
             return projects
         }
 
-        fun createProject2(name: String, teamName: String, startDate: String, ) = Project( // create project fun for persistence
+        fun createProject2(name: String, teamName: String, startDate: String, ) = Project( // create project for persistence (file and console)
                 name = if(name.isEmpty()) "ProjectA" else name,
                 teamName = if(teamName.isEmpty()) "TeamA" else teamName,
                 startDate = if(startDate.isEmpty()) "30/11/2020" else startDate,
@@ -53,8 +30,6 @@ data class Project(
         fun saveToConsole(project: Project) { // save project and output to console
             Persistence.createFilePersistence().save(project.toString())
         }
-
-
 
         fun saveToFile(project: Project){ // save project to file
             val path = System.getProperty("user.dir") + "\\database.txt"
