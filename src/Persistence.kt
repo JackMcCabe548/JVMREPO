@@ -10,6 +10,6 @@ abstract class Persistence {
 class FilePersistence(): Persistence(){
 
     override infix fun save(data: String) {
-        println("Save $data to database.txt")
+        println("Saved $data to console")
     }
 }
