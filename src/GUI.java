@@ -99,6 +99,7 @@ public class GUI {
         newProjectButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // input dialog for each new project with date chooser as last parameter
                 JTextField textField1 = new JTextField();
                 JTextField textField2 = new JTextField();
 
@@ -111,6 +112,7 @@ public class GUI {
                         JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
 
                 if (inputDialog == JOptionPane.OK_OPTION) {
+                    // get the date format, convert to string and create a project with the given parameters
                     String s="";
                     SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
                     s=sdf.format(((JDateChooser)inputs[5]).getDate());
@@ -156,6 +158,7 @@ public class GUI {
         newTaskButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // input dialog for each new task
                 JTextField textField1 = new JTextField();
                 JTextField textField2 = new JTextField();
                 JTextField textField3 = new JTextField();
@@ -166,6 +169,7 @@ public class GUI {
                         JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
 
                 if (inputDialog == JOptionPane.OK_OPTION) {
+                    // save each task to the list of tasks in the given format
                     String text = textField1.getText() + "\n" + " - " + textField2.getText() + " - " + textField3.getText();
                     ((DefaultListModel)allTasksList.getModel()).addElement(text);
                 }
@@ -175,11 +179,11 @@ public class GUI {
         saveAllButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                // if/else statement to prevent null pointer exc. It won't save a project and team if project object is empty
                 if(project != null){
-                    handler.saveToConsole(project);
-                    handler.saveToFile(project);
-                    savedProjects.addItem(project);
+                    handler.saveToConsole(project); // save to console
+                    handler.saveToFile(project); // save to file
+                    savedProjects.addItem(project); // add project to combobox
                     if(currentTeam != null){
                         System.out.println("Team members: ");
                         for (int i = 0; i < currentTeam.getModel().getSize(); i++) {
