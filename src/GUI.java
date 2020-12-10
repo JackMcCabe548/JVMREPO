@@ -153,19 +153,24 @@ public class GUI {
         saveAllButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(currentTeam != null){
-                    System.out.println("Team members: ");
-                    for (int i = 0; i < currentTeam.getModel().getSize(); i++) {
-                        System.out.println(currentTeam.getModel().getElementAt(i));
+
+                if(project != null){
+                    handler.saveToConsole(project);
+                    handler.saveToFile(project);
+                    savedProjects.addItem(project);
+                    if(currentTeam != null){
+                        System.out.println("Team members: ");
+                        for (int i = 0; i < currentTeam.getModel().getSize(); i++) {
+                            System.out.println(currentTeam.getModel().getElementAt(i));
+                        }
+                    }else {
+                        System.out.println("Team members haven't been picked yet!");
                     }
-                }else {
-                    System.out.println("Team members haven't been picked yet!");
+                    savedTeams.addItem(txtTeamName.getText());
+                }else{
+                    JOptionPane.showMessageDialog(null, "You haven't created a project yet!", "Error Message:", JOptionPane.INFORMATION_MESSAGE);
                 }
 
-                handler.saveToConsole(project);
-                handler.saveToFile(project);
-                savedProjects.addItem(project);
-                savedTeams.addItem(txtTeamName.getText());
             }
         });
 

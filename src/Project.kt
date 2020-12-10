@@ -50,9 +50,11 @@ data class Project(
                 startDate = if(startDate.isEmpty()) "30/11/2020" else startDate,
         )
 
-        fun saveToConsole(project: Project){ // save project and output to console
-                Persistence.createFilePersistence().save(project.toString())
+        fun saveToConsole(project: Project) { // save project and output to console
+            Persistence.createFilePersistence().save(project.toString())
         }
+
+
 
         fun saveToFile(project: Project){ // save project to file
             val path = System.getProperty("user.dir") + "\\database.txt"
